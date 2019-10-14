@@ -8,18 +8,22 @@ const MovieList = props => {
       axios
         .get('http://localhost:5000/api/movies')
         .then(response => {
+          console.log(1111)
+
+          console.log(response)
           setMovies(response.data);
         })
         .catch(error => {
           console.error('Server Error', error);
         });
     }
-    
+
     getMovies();
   }, []);
-  
+
   return (
     <div className="movie-list">
+      <h1>Hello</h1>
       {movies.map(movie => (
         <MovieDetails key={movie.id} movie={movie} />
       ))}
