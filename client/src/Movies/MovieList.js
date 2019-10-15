@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const MovieList = props => {
+  // console.log(props)
   const [movies, setMovies] = useState([])
   useEffect(() => {
     const getMovies = () => {
       axios
         .get('http://localhost:5000/api/movies')
         .then(response => {
-          console.log(1111)
-
+          // console.log(1111)
           console.log(response)
           setMovies(response.data);
         })
@@ -23,10 +24,11 @@ const MovieList = props => {
 
   return (
     <div className="movie-list">
-      <h1>Hello</h1>
-      {movies.map(movie => (
-        <MovieDetails key={movie.id} movie={movie} />
-      ))}
+      {movies.length > 0 ? movies.map(movie => (
+        <Link to={`/movies/${movie.id}`}>
+          <MovieDetails key={movie.id} movie={movie} />
+        </Link>
+      )) : null}
     </div>
   );
 }
